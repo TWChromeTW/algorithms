@@ -1,5 +1,7 @@
 package stepikALGS;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Fibonachi {
@@ -31,26 +33,40 @@ public class Fibonachi {
     }
 
     //rest fib for m
-    public static Long fib3(Long n, Long m) {
+    public static Long fib3(Long n, int m) {
+        List<Long> arr = new ArrayList<>();
+        arr.add(0l);
+        arr.add(1l);
+
         long prev2 = 0;
         long prev1 = 1;
-        long current = 1;
+        long curr = 1;
 
-        for (long i = 2; i <= n; i++) {
-            current = (prev1 % m + prev2 % m) % m;
+        while (true) {
+            curr = (prev2 + prev1) % m;
             prev2 = prev1;
-            prev1 = current;
+            prev1 = curr;
+            arr.add(curr);
+
+            if (prev2 == 0 && prev1 == 1 && arr.size() > 2) {
+                arr.remove(arr.size() - 1);
+                arr.remove(arr.size() - 1);
+                break;
+            }
         }
 
-        return current;
+        int l = arr.size();
+        int indx = (int)(n % l);
+
+        return arr.get(indx);
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+        Long n = sc.nextLong();
         int m = sc.nextInt();
 
-//        System.out.println(fib3(n, m));
+        System.out.println(fib3(n, m));
     }
 
 }
