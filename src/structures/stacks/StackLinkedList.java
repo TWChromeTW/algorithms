@@ -1,4 +1,4 @@
-package structures;
+package structures.stacks;
 
 import structures.exceptions.StackException;
 
